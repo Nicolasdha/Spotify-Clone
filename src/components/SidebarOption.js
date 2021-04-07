@@ -20,7 +20,13 @@ function SidebarOption({ playlist, title, Icon }) {
   return (
     <div className='sidebarOption'>
       {Icon && <Icon className='sidebarOption__icon' />}
-      {Icon ? <h4>{title}</h4> : <p onClick={showPlaylist}>{title}</p>}
+      {Icon ? (
+        <h4>{title}</h4>
+      ) : (
+        <p onClick={showPlaylist} className='sidebarOption__playlist'>
+          {title}
+        </p>
+      )}
     </div>
   );
 }

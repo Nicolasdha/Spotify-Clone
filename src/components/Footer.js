@@ -25,6 +25,8 @@ function Footer() {
 
   useEffect(() => {
     spotify.getMyCurrentPlaybackState().then((response) => {
+      console.log(response);
+
       dispatch({
         type: "SET_PLAYING",
         playing: response.is_playing,
@@ -35,12 +37,13 @@ function Footer() {
         item: response.item,
       });
     });
-  }, [spotify, dispatch]);
+  }, [spotify, dispatch, playing]);
 
   const handlePlayPause = () => {
     if (playing) {
       spotify.pause().then(() => {
         spotify.getMyCurrentPlayingTrack().then((response) => {
+          document.title = "Spotify - Web Player";
           dispatch({
             type: "SET_ITEM",
             item: response.item,
@@ -55,6 +58,8 @@ function Footer() {
     } else {
       spotify.play().then(() => {
         spotify.getMyCurrentPlayingTrack().then((response) => {
+          document.title =
+            response.item.name + " - " + response.item.artists[0].name;
           dispatch({
             type: "SET_ITEM",
             item: response.item,
@@ -72,6 +77,8 @@ function Footer() {
   const skipNext = () => {
     spotify.skipToNext().then(() => {
       spotify.getMyCurrentPlayingTrack().then((response) => {
+        document.title =
+          response.item.name + " - " + response.item.artists[0].name;
         dispatch({
           type: "SET_ITEM",
           item: response.item,
@@ -88,6 +95,8 @@ function Footer() {
   const skipPrevious = () => {
     spotify.skipToPrevious().then(() => {
       spotify.getMyCurrentPlayingTrack().then((response) => {
+        document.title =
+          response.item.name + " - " + response.item.artists[0].name;
         dispatch({
           type: "SET_ITEM",
           item: response.item,

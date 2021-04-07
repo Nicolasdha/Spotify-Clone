@@ -6,9 +6,9 @@
   overflow-y: overlay;
   background: rgb(66, 15, 19);
   background: linear-gradient(
-    191deg,
-    rgb(95, 22, 28) 42%,
-    rgba(0, 0, 0, 1) 85%
+    180deg,
+    rgb(95, 22, 28) 40%,
+    rgba(0, 0, 0, 1) 70%
   );
   min-width: 700px;
 }
@@ -28,7 +28,7 @@
 }
 
 .body__header {
-  font-size: 6rem;
+  font-size: 5rem;
   margin-bottom: 10px;
 }
 

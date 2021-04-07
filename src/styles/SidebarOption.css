@@ -21,9 +21,9 @@
   padding: 0 10px;
 }
 
-.sidebarOption > p {
+.sidebarOption__playlist {
   margin-top: 10px;
   margin-left: 20px;
   font-size: 14px;
-  padding-right: 100%;
+  padding-right: 15%;
 }
