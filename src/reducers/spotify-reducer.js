@@ -11,6 +11,7 @@ export const initialState = {
   playlistFocus: null,
   search: null,
   rendered: null,
+  repeat: "off",
 };
 
 const reducer = (state, action) => {
@@ -64,6 +65,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         search: action.search,
+      };
+    case "SET_REPEAT":
+      return {
+        ...state,
+        repeat: action.repeat,
       };
 
     default:

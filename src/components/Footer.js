@@ -12,12 +12,16 @@ import "../styles/Footer.css";
 import { useStateProviderValue } from "../context/stateProvider";
 
 function Footer() {
-  const [{ token, item, playing, spotify }, dispatch] = useStateProviderValue();
+  const [
+    { token, item, playing, spotify, repeat },
+    dispatch,
+  ] = useStateProviderValue();
   // console.log(token);
   // console.log("item", item);
   // console.log(spotify);
   // console.log(spotify.play);
   // console.log(spotify.skipToNext);
+  const [isActive, setActive] = useState("false");
 
   useEffect(() => {
     spotify.getMyCurrentPlaybackState().then((response) => {
@@ -96,6 +100,31 @@ function Footer() {
       });
     });
   };
+
+  const setVolume = (e) => {
+    if (e.target.ariaValueNow !== null || e.target.ariaValueNow !== NaN) {
+      spotify.setVolume(e.target.ariaValueNow);
+    }
+  };
+
+  const setRepeat = () => {
+    if (repeat !== "track") {
+      dispatch({
+        type: "SET_REPEAT",
+        repeat: "track",
+      });
+    } else {
+      dispatch({
+        type: "SET_REPEAT",
+        repeat: "off",
+      });
+    }
+    spotify.setRepeat(repeat);
+
+    setActive(!isActive);
+    console.log("repeat", repeat);
+  };
+
   return (
     <div className='footer'>
       <div className='footer__left'>
@@ -135,7 +164,10 @@ function Footer() {
         )}
 
         <SkipNextIcon onClick={skipNext} className='footer__icon' />
-        <RepeatIcon className='footer__green' />
+        <RepeatIcon
+          onClick={setRepeat}
+          className={isActive ? "footer__green" : "footer__icon "}
+        />
       </div>
       <div className='footer__right'>
         <Grid container spacing={2}>
@@ -146,7 +178,11 @@ function Footer() {
             <VolumeDownIcon />
           </Grid>
           <Grid item xs>
-            <Slider aria-labelledby='continuous-slider' />
+            <Slider
+              defaultValue={100}
+              aria-labelledby='continuous-slider'
+              onChange={setVolume}
+            />
           </Grid>
         </Grid>
       </div>
