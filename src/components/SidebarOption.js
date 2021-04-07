@@ -8,7 +8,6 @@ function SidebarOption({ playlist, title, Icon }) {
 
   const showPlaylist = () => {
     spotify.getPlaylist(playlist.id).then((response) => {
-      console.log("focued", response);
       dispatch({
         type: "SET_PLAYLIST_FOCUS",
         playlist: response,

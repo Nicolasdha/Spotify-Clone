@@ -16,7 +16,6 @@ function Header() {
             type: "SEARCH_QUERY",
             search: response,
           });
-          console.log(response);
         });
     } else {
       dispatch({

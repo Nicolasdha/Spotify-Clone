@@ -11,7 +11,7 @@ function App() {
   const [{ token }, dispatch] = useStateProviderValue();
 
   const spotify = new SpotifyWebApi();
-  console.log(spotify);
+  // console.log(spotify);
   useEffect(() => {
     // Set spotify global
     dispatch({
@@ -40,7 +40,6 @@ function App() {
       });
 
       spotify.getUserPlaylists().then((playlists) => {
-        console.log(playlists);
         dispatch({
           type: "SET_PLAYLISTS",
           playlists,

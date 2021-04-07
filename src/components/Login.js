@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Login.css";
-import { loginUrl, getTokenFromUrl } from "../spotify";
+import { loginUrl } from "../spotify";
 
 function Login() {
   // getTokenFromUrl(); maybe once use firebase?

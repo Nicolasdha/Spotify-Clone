@@ -3,10 +3,11 @@
   justify-content: space-between;
   position: fixed;
   bottom: 0;
-  height: 65px;
+  height: 50px;
   width: 97%;
-  background-color: #282828;
+  background-color: #181818;
   padding: 20px;
+  border-top: 1px solid rgba(49, 49, 49, 0.719);
 }
 
 .footer__left {

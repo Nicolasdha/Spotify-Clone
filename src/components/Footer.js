@@ -13,7 +13,7 @@ import { useStateProviderValue } from "../context/stateProvider";
 
 function Footer() {
   const [
-    { token, item, playing, spotify, repeat },
+    { item, playing, spotify, repeat },
     dispatch,
   ] = useStateProviderValue();
   // console.log(token);
@@ -102,7 +102,7 @@ function Footer() {
   };
 
   const setVolume = (e) => {
-    if (e.target.ariaValueNow !== null || e.target.ariaValueNow !== NaN) {
+    if (typeof e.target.ariaValueNow === "string") {
       spotify.setVolume(e.target.ariaValueNow);
     }
   };
@@ -122,7 +122,6 @@ function Footer() {
     spotify.setRepeat(repeat);
 
     setActive(!isActive);
-    console.log("repeat", repeat);
   };
 
   return (

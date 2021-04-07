@@ -4,7 +4,13 @@
   height: 100vh;
   color: white;
   overflow-y: overlay;
-  background: linear-gradient(rgb(91, 87, 115), black);
+  background: rgb(66, 15, 19);
+  background: linear-gradient(
+    191deg,
+    rgb(95, 22, 28) 42%,
+    rgba(0, 0, 0, 1) 85%
+  );
+  min-width: 700px;
 }
 
 .body::-webkit-scrollbar {
@@ -21,13 +27,21 @@
   flex: 1;
 }
 
-.body__infoText > h2 {
-  font-size: 48px;
+.body__header {
+  font-size: 6rem;
   margin-bottom: 10px;
 }
 
-.body__infoText > p {
+.body__infoText > p,
+.body__infoText > strong,
+.body__owner,
+.body__songTotal {
   font-size: 14px;
+  color: rgba(190, 190, 190, 0.87);
+  margin-bottom: 5px;
+}
+.body__owner {
+  font-weight: 800;
 }
 
 .body__info > img {
@@ -60,7 +74,7 @@
   margin: 20px -30px;
 }
 
-.body__background {
+/* .body__background {
   position: absolute;
   top: 13vh;
   right: 0;
@@ -68,4 +82,63 @@
   height: 80%;
   width: 80%;
   background-color: black;
+} */
+
+.body__titles {
+  display: flex;
+  align-items: center;
+  margin: 20px 20px;
+  width: 100%;
+}
+.body__titles--trackartist,
+.body__titles--index,
+.body__titles--artist,
+.body__titles--album,
+.body__titles--duration,
+.body__titles--dateAdded {
+  font-size: 13px;
+  color: #9a9898;
+}
+
+.body__titles--album,
+.body__titles--trackartist,
+.body__titles--dateAdded {
+  flex: 0.3;
+}
+
+.body__titles--track {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.body__titles--trackartist {
+  margin-left: 15px;
+}
+
+.body__titles--duration {
+  margin-right: 35px;
+  flex: 0.1;
+}
+.body__titles--dateAdded {
+  margin-right: -5px;
+}
+.body__titles--artist {
+  font-size: 14px;
+  margin-top: 3px;
+}
+.body__titles--album {
+  margin-left: 65px;
+}
+.body__titles--index {
+  margin-left: 10px;
+}
+
+.body--hr {
+  width: 97%;
+  margin: 0 auto;
+  opacity: 0.1;
+}
+
+.body__searchResults {
+  font-size: 2.3rem;
 }

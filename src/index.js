@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { StateProvider } from "./context/stateProvider";
 import reducer, { initialState } from "./reducers/spotify-reducer";
 

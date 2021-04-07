@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -8,19 +8,13 @@ import Header from "./Header";
 import { useStateProviderValue } from "../context/stateProvider";
 import SongRow from "./SongRow";
 import SearchSongRow from "./SearchSongRow";
+import millisToMinutesAndSeconds from "../selectors/MilliToMinues";
 
 function Body() {
   const [
     { discover_weekly, spotify, item, playlistFocus, search },
     dispatch,
   ] = useStateProviderValue();
-
-  const [rendered, setRendered] = useState({});
-
-  useEffect(() => {
-    setRendered(playlistFocus);
-    setRendered(discover_weekly);
-  }, [playlistFocus, discover_weekly]);
 
   const playPlaylist = (id) => {
     spotify
@@ -33,7 +27,6 @@ function Body() {
             type: "SET_ITEM",
             item: response.item,
           });
-          console.log(item);
           dispatch({
             type: "SET_PLAYING",
             playing: true,
@@ -43,7 +36,6 @@ function Body() {
   };
 
   const playSong = (id) => {
-    console.log(id);
     spotify
       .play({
         uris: [`spotify:track:${id}`],
@@ -61,7 +53,6 @@ function Body() {
         });
       });
   };
-
   return (
     <div className='body'>
       {search ? (
@@ -69,16 +60,23 @@ function Body() {
           <Header />
           <div className='body__info'>
             <div className='body__infoText'>
-              <strong>Search Results</strong>
-
+              <strong className='body__searchResults'>Search Results</strong>
+              <div className='body__titles'>
+                <div className='body__titles--index '>#</div>
+                <div className='body__titles--trackartist'>TITLE</div>
+                <div className='body__titles--album'>ALBUM</div>
+                <div className='body__titles--dateAdded'>DATE ADDED</div>
+                <div className='body__titles--duration'>LENGTH</div>
+              </div>
+              <hr className='body--hr'></hr>
               {search.tracks.items.map((song, i) => {
-                console.log("peep", song);
                 return (
                   <SearchSongRow
                     playSong={playSong}
                     track={song}
                     album={song.album}
                     key={i}
+                    index={i}
                   />
                 );
               })}
@@ -93,13 +91,13 @@ function Body() {
               src={
                 !playlistFocus
                   ? discover_weekly && discover_weekly.images[0].url
-                  : item.album.images[0].url
+                  : item && item.album.images[0].url
               }
               alt=''
             />
             <div className='body__infoText'>
               <strong>PLAYLIST</strong>
-              <h2>
+              <h2 className='body__header'>
                 {!playlistFocus
                   ? discover_weekly && discover_weekly.name
                   : playlistFocus.name}
@@ -109,6 +107,33 @@ function Body() {
                   ? discover_weekly && discover_weekly.description
                   : playlistFocus.description}
               </p>
+              <span className='body__owner'>
+                {!playlistFocus
+                  ? discover_weekly && discover_weekly.owner.display_name
+                  : playlistFocus.owner.display_name}
+              </span>
+              <span className='body__songTotal'>
+                {!playlistFocus
+                  ? discover_weekly &&
+                    ` - ${
+                      discover_weekly.tracks.total
+                    } songs, ${millisToMinutesAndSeconds(
+                      discover_weekly.tracks.items.reduce(
+                        (initial, current) =>
+                          initial + current.track.duration_ms,
+                        0
+                      )
+                    )} min`
+                  : ` - ${
+                      playlistFocus.tracks.total
+                    } songs,  ${millisToMinutesAndSeconds(
+                      playlistFocus.tracks.items.reduce(
+                        (initial, current) =>
+                          initial + current.track.duration_ms,
+                        0
+                      )
+                    )} min`}
+              </span>
             </div>
           </div>
 
@@ -121,16 +146,33 @@ function Body() {
               <FavoriteIcon fontSize='large' />
               <MoreHorizIcon />
             </div>
+            <div className='body__titles'>
+              <div className='body__titles--index '>#</div>
+              <div className='body__titles--trackartist'>TITLE</div>
+              <div className='body__titles--album'>ALBUM</div>
+              <div className='body__titles--dateAdded'>DATE ADDED</div>
+              <div className='body__titles--duration'>LENGTH</div>
+            </div>
+            <hr className='body--hr'></hr>
 
             {!playlistFocus
               ? discover_weekly &&
                 discover_weekly.tracks.items.map((song, i) => (
-                  <SongRow playSong={playSong} track={song.track} key={i} />
+                  <SongRow
+                    playSong={playSong}
+                    track={song.track}
+                    key={i}
+                    index={i}
+                  />
                 ))
               : playlistFocus.tracks.items.map((song, i) => {
-                  console.log("peep", song);
                   return (
-                    <SongRow playSong={playSong} track={song.track} key={i} />
+                    <SongRow
+                      playSong={playSong}
+                      index={i}
+                      track={song.track}
+                      key={i}
+                    />
                   );
                 })}
           </div>

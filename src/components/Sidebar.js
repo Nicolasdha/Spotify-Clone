@@ -30,9 +30,9 @@ function Sidebar() {
         src='https://getheavy.com/wp-content/uploads/2019/12/spotify2019-830x350.jpg'
         alt=''
       />
-      <a onClick={homeReset}>
+      <button onClick={homeReset}>
         <SidebarOption title='Home' Icon={HomeIcon} />
-      </a>
+      </button>
       <SidebarOption title='Search' Icon={SearchIcon} />
       <SidebarOption title='Your Library' Icon={LibraryMusicIcon} />
 

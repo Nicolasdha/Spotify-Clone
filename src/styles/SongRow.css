@@ -1,6 +1,6 @@
 .songRow {
   margin-left: 20px;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   align-items: center;
   z-index: 100;
@@ -9,8 +9,7 @@
 
 .songRow:hover {
   cursor: pointer;
-  background-color: black;
-  opacity: 0.8;
+  background-color: rgba(59, 56, 57, 0.564);
 }
 
 .songRow:last-child {
@@ -18,20 +17,50 @@
 }
 
 .songRow__info {
-  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
-.songRow__info > h1 {
-  font-size: 16px;
-}
-
-.songRow__info > p {
+.songRow__index,
+.songRow__artist,
+.songRow__album,
+.songRow__duration,
+.songRow__dateAdded {
   font-size: 14px;
-  margin-top: 3px;
-  color: gray;
+  color: #9a9898;
 }
 
-.songRow__album {
+.songRow__album,
+.songRow__trackartist,
+.songRow__dateAdded {
+  flex: 0.3;
+  padding-right: 15px;
+}
+
+.songRow__track {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.songRow__trackartist {
+  margin-left: 15px;
+}
+
+.songRow__duration {
+  flex: 0.1;
+}
+
+.songRow__artist {
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.songRow__album--img {
   height: 40px;
   width: 40px;
+}
+
+.songRow__index {
+  margin-right: 15px;
 }
