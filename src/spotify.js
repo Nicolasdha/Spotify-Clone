@@ -4,7 +4,7 @@
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 
 // Once auth they will be redirected
-const redirectUri = "http://localhost:3000/";
+const redirectUri = "https://ndurikha-spotify-clone.firebaseapp.com/";
 
 const clientId = "411a340581964ab5beedbeae30b75163";
 
@@ -19,7 +19,7 @@ const scopes = [
 ];
 
 // once auth give me back a token which is a pass
-export const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+export const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=https://${redirectUri}&scope=${scopes.join(
   "%20"
 )}&response_type=token&show_dialog=true`;
 
